@@ -18,13 +18,18 @@
 
 ## 📌 Overview
 
-Derive cryptographic keys from passwords
+OKey derives cryptographic keys from passwords and manages password hashing utilities. It supports PBKDF2, scrypt, bcrypt, Argon2id, and HKDF (stdlib for PBKDF2/scrypt; optional libs for bcrypt/Argon2), plus password generation, salt generation, and hash-format identification via subcommands.
 
 ---
 
 ## ✨ Features
 
-- Derive keys with PBKDF2/scrypt/bcrypt/Argon2/HKDF — strength meter, salt, HMAC, hash identify
+- Key derivation subcommand with PBKDF2-SHA256/512, scrypt, bcrypt, argon2id, and hkdf-sha256
+- Password via `--password-env` (preferred) or `--password`; hex salt generation when omitted
+- Configurable iteration count, output length, and HKDF info string; JSON output option
+- Secure password generator with length/count and optional no-special charset
+- Random salt/key generation in hex, base64, or base64url formats
+- Password-hash format identification for common hash strings
 
 ---
 
@@ -38,7 +43,10 @@ Derive cryptographic keys from passwords
 ## 🚀 Usage
 
 ```bash
-./OKey
+./OKey derive --password-env PASS --algo pbkdf2-sha256 --iter 600000 --json
+./OKey genpass --length 24 --count 3
+./OKey salt --bytes 32 --fmt hex
+./OKey --help
 ```
 
 ---
